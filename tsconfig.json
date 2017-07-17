@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "declaration": true, // generate TypeScript definitions
+        "outDir": "./dist", // transpile JS in this directory
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "lib": [
+            "es2015",
+            "dom"
+        ],
+        "target": "es5"
+    },
+    "include": [
+        "src/main.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

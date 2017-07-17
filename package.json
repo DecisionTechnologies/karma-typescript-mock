@@ -1,0 +1,46 @@
+{
+  "name": "karma-typescript-mock",
+  "version": "1.0.0",
+  "description": "karma-typescript mocker",
+  "main": "dist/main.js",
+  "typings": "dist/main.d.ts",
+  "files": [
+    "dist/*.js",
+    "dist/*.ts"
+  ],
+  "scripts": {
+    "test": "karma start --single-run",
+    "dev:test": "karma start",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DecisionTechnologies/karma-typescript-mock"
+  },
+  "keywords": [
+    "decisiontech",
+    "karma",
+    "unit test",
+    "typescript",
+    "karma-typescript"
+  ],
+  "author": "Alex Jones <alex.jones@decision.tech>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DecisionTechnologies/karma-typescript-mock/issues"
+  },
+  "homepage": "https://github.com/DecisionTechnologies/karma-typescript-mock#readme",
+  "devDependencies": {
+    "@types/jasmine": "^2.5.53",
+    "@types/qs": "^6.5.0",
+    "jasmine-core": "^2.6.4",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-teamcity-reporter": "git+https://github.com/nievebc/karma-teamcity-reporter.git",
+    "qs": "^6.5.0",
+    "typescript": "^2.4.1",
+    "karma-typescript": "^3.0.4"
+  }
+}
