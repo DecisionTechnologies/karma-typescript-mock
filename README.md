@@ -38,7 +38,7 @@ npm install --save-dev karma-typescript-mock
 ```
     import { JasmineKarmaTypeScriptMockerSingle } from "karma-typescript-mock-jasmine";
     describe('Test', ()=>{
-        JasmineKarmaTypeScriptMocker('qs', parse',  ()=>()=>"result)
+        JasmineKarmaTypeScriptMockerSingle('qs', parse',  ()=>()=>"result)
         it('it', ()=>{
             
         })
