@@ -57,6 +57,8 @@ npm install --save-dev karma-typescript-mock
 * KarmaTypescriptMocker.mock('**./bar**
 ##### npm module
 * KarmaTypescriptMocker.mock('**query-string**'
+##### private npm module
+* KarmaTypescriptMocker.mock('**@private/custom**'
 
 
 ## Limitations
