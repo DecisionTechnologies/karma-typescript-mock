@@ -127,15 +127,17 @@ export class KarmaTypescriptMocker {
     }
 
     private GetVerionsOfFile(importing: ICommonJsModule): string[] {
-        let dependencyFileName = importing.id;
+        const dependencyFileName = importing.id;
         if (/node_modules/.test(dependencyFileName)) {
-            let path = dependencyFileName.split('/')
-            return [path[1]];
+            let path = dependencyFileName.split('/'),
+                  nodeModulePath = path[1];
+            if(nodeModulePath.indexOf("@") == 0) nodeModulePath = `${nodeModulePath}/${path[2]}`
+            return [nodeModulePath];
         }
-        let result = [dependencyFileName]
+        const result = [dependencyFileName]
         if (importing.id != importing.uri && importing.uri != dependencyFileName) result.push(importing.uri);
-        let importNameWithoutbasePath = this.GetDependencyWithoutBasePath(dependencyFileName)
-        let importNameWithoutBaseOrExtension = this.RemoveTsOrJsExtension(importNameWithoutbasePath);
+        const importNameWithoutbasePath = this.GetDependencyWithoutBasePath(dependencyFileName)
+        const importNameWithoutBaseOrExtension = this.RemoveTsOrJsExtension(importNameWithoutbasePath);
         result.push(importNameWithoutbasePath)
         result.push(importNameWithoutBaseOrExtension)
         result.push('./' + importNameWithoutbasePath)

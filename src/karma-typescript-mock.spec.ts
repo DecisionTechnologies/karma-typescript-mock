@@ -5,7 +5,8 @@ describe('karma-typescript-mock', () => {
     const test1MockFunc = () => "test1MockFunc", test1RealFunc = () => "test1RealFunc", validMockImportName = "test1",
         test2MockFunc = () => "test2MockFunc", test2RealFunc = () => "test2realFunc",
         test3MockFunc = () => "test3MockFunc", test3RealFunc = () => "test3realFunc",
-        _exportsTest1 = { test: test1RealFunc }, _exportsTest2 = { test: test2RealFunc }, _exportsTest3 = { test: test3RealFunc },
+        test4MockFunc = () => "test3MockFunc", test4RealFunc = () => "test3realFunc",
+        _exportsTest1 = { test: test1RealFunc }, _exportsTest2 = { test: test2RealFunc }, _exportsTest3 = { test: test3RealFunc }, _exportsTest4 = {test: test4RealFunc },
         callMockExport = (name: RegExp | string, mock = test1MockFunc) => _sut.mockExport(name, 'test', () => mock),
         callMock = (name: string | RegExp) => _sut.mock(name, { test: () => test1MockFunc }),
         expectOriginal = () => expect(_exportsTest1.test()).toBe(test1RealFunc()),
@@ -20,6 +21,8 @@ describe('karma-typescript-mock', () => {
             { "exports": _exportsTest2, "id": "test2.ts", "uri": "C:/projects/karma-typescript-mock/test2.ts" },
             "C:/projects/karma-typescript-mock/src/test3.ts":
             { "exports": _exportsTest3, "id": "src/test3.ts", "uri": "C:/projects/karma-typescript-mock/src/test3.ts" },
+            "C:/projects/karma-typescript-mock/node_modules/@private/test4/index.js":
+            { "exports": _exportsTest4, "id": "node_modules/@private/test4/index.js", "uri": "C:/projects/karma-typescript-mock/node_modules/@private/test4/index.js" },
 
         }, { error: consoleErrorSpy } as Console);
     });
@@ -97,5 +100,17 @@ describe('karma-typescript-mock', () => {
         it('AND using src/ THEN valid', () => isValid('src/test3'))
         it('AND using src/*.ts THEN valid', () => isValid('src/test3.ts'))
         it('AND using base path THEN valid', () => isValid('C:/projects/karma-typescript-mock/src/test3.ts'))
+    })
+
+    describe('WHEN private npm package', () => {
+        const isValid = (name: string) => {
+            let restore = callMockExport(name, test4MockFunc);
+            expect(consoleErrorSpy).not.toHaveBeenCalled();
+            expect(_exportsTest4.test()).toBe(test3MockFunc());
+            restore();
+            expect(_exportsTest4.test()).toBe(test3RealFunc())
+        };
+
+        it('AND using @private/test4 THEN valid', () => isValid('@private/test4'))
     })
 })
